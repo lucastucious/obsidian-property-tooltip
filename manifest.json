@@ -1,0 +1,11 @@
+{
+	"id": "obsidian-properties-definitions",
+	"name": "Properties Definitions",
+	"version": "0.0.1",
+	"minAppVersion": "0.15.0",
+	"description": "Personalize the tooltips for file metadata based on your organizational preferences.",
+	"author": "Lucastucious",
+	"authorUrl": "https://github.com/lucastucious",
+	"fundingUrl": "",
+	"isDesktopOnly": false
+}
