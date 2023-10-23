@@ -1,10 +1,11 @@
 import {
 	ButtonComponent,
 	PluginSettingTab,
-	Setting
+    Setting,
+    Notice
 } from "obsidian";
 import PropertyTip from "main";
-import { log } from "console";
+import {  } from "console";
 
 
 export interface TooltipMap {
@@ -66,16 +67,18 @@ export class PropertyTipSettingTab extends PluginSettingTab {
             (propertytip, index) => {
                 const s = new Setting(this.containerEl)
                     .addText(row => row
-                        .setPlaceholder("property")
+                        .setPlaceholder("Property")
                         .setValue(propertytip.property)
                         .onChange((new_property) => {
                             if (
                                 new_property &&
                                 this.plugin.settings.propertiesTips.some(
                                     (e) => e.property == new_property
-                                )
+                                ) &&
+                                propertytip.property != new_property
                             ) {
-                                log("This property is already tooltiped")
+                                console.error("This property is already tooltiped")
+                                new Notice("Error:This property is already tooltiped");
                                 return;
                             }
                             this.plugin.settings.propertiesTips[
@@ -83,10 +86,12 @@ export class PropertyTipSettingTab extends PluginSettingTab {
                             ].property = new_property;
                             this.plugin.saveSettings();
                         })
+                        .inputEl.setAttribute("id", "property")
+                        
                         
                 )
                 .addText(row => row
-                    .setPlaceholder("tip")
+                    .setPlaceholder("Tooltip")
                     .setValue(propertytip.tooltip)
                     .onChange((new_tooltip) => {
                         this.plugin.settings.propertiesTips[
@@ -94,6 +99,7 @@ export class PropertyTipSettingTab extends PluginSettingTab {
                         ].tooltip = new_tooltip;
                         this.plugin.saveSettings();
                     })
+                    .inputEl.setAttribute("id", "tooltip")
                     
             )
                     .addExtraButton((cb) => {
