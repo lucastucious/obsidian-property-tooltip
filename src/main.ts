@@ -16,10 +16,13 @@ export default class PropertyTip extends Plugin {
 
 		// If the plugin hooks up any global DOM events (on parts of the app that doesn't belong to this plugin)
 		// Using this function will automatically remove the event listener when this plugin is disabled.
-		this.registerDomEvent(document, 'click', (evt: MouseEvent) => {
-			console.log('click', evt);
-		});
+		this.app.metadataCache.on('changed', (element) => {
 
+			console.log('OnCached event occurred.', element);
+		});
+		
+		
+			
 		// When registering intervals, this function will automatically clear the interval when the plugin is disabled.
 		this.registerInterval(window.setInterval(() => console.log('setInterval'), 5 * 60 * 1000));
 	}
@@ -38,4 +41,8 @@ export default class PropertyTip extends Plugin {
 }
 
 
+
+function OnCached(): any {
+	console.log("Metadatachec")
+}
 
